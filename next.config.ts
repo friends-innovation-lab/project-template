@@ -1,7 +1,25 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  // Edge redirects - instant, no serverless cold start
+  async redirects() {
+    return [
+      // Uncomment and customize as needed:
+      // {
+      //   source: '/',
+      //   destination: '/dashboard',
+      //   permanent: false,
+      // },
+    ]
+  },
 
-export default nextConfig;
+  // Recommended settings
+  reactStrictMode: true,
+  
+  // Optimize images
+  images: {
+    formats: ['image/avif', 'image/webp'],
+  },
+}
+
+export default nextConfig
