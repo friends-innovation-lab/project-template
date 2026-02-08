@@ -1,123 +1,75 @@
-# Friends Innovation Lab - Project Standards
+# CLAUDE.md
 
-> This file defines how Claude Code should work on this project.
+> Instructions for Claude Code when working on this project.
 
----
+## Project Overview
 
-## Project Context
+**[PROJECT_NAME]** — [Brief description]
 
-This is a **Friends Innovation Lab** prototype. We build fast, high-quality prototypes for small businesses and government agencies.
+- **Stack:** Next.js 14, TypeScript, Tailwind CSS, shadcn/ui, Supabase
+- **Deployed:** Vercel at [URL]
+- **Repo:** [GitHub URL]
 
-- **Speed matters** — We ship in weeks, not months
-- **Quality matters more** — Clients judge us on first impressions
-- **Government-ready** — Even small business projects follow federal best practices
-
----
-
-## Tech Stack
-
-| Layer | Tool |
-|-------|------|
-| Framework | Next.js 14+ (App Router) |
-| Language | TypeScript (strict mode) |
-| Styling | Tailwind CSS |
-| Components | shadcn/ui |
-| Database | Supabase (PostgreSQL) |
-| Hosting | Vercel |
-
----
-
-## File Structure
-
-```
-app/
-├── (auth)/           # Auth-required routes
-├── (public)/         # Public routes
-├── api/              # API routes (use sparingly)
-├── layout.tsx
-└── page.tsx          # Landing - static only!
-
-components/
-├── ui/               # shadcn/ui components
-├── forms/            # Form components
-├── layouts/          # Layout components
-└── [feature]/        # Feature-specific components
-
-lib/
-├── supabase.ts       # Supabase browser client
-├── supabase-server.ts # Supabase server client
-├── utils.ts          # Utility functions
-└── types.ts          # TypeScript types
-
-hooks/                # Custom React hooks
-```
-
----
-
-## Critical Rules
-
-### 1. No Server-Side Redirects on Landing Pages
-
-```typescript
-// ❌ NEVER - causes cold start delays
-import { redirect } from 'next/navigation'
-export default function Page() { redirect('/login') }
-
-// ✅ Use next.config.js redirects instead (edge, instant)
-```
-
-### 2. Lazy-Load API Calls
-
-Don't fetch data until the user needs it. No Supabase calls on initial page mount.
-
-### 3. Type Everything
-
-No `any` types without a comment explaining why.
-
-### 4. Error States Are Required
-
-Every data fetch needs loading, error, and empty states.
-
-### 5. Mobile-First
-
-All layouts must work on 375px width.
-
----
-
-## Code Quality
-
-Before marking any feature complete:
-
-- [ ] No TypeScript errors
-- [ ] No console errors in browser
-- [ ] Works on mobile (375px)
-- [ ] Loading states for async operations
-- [ ] Error states for async operations
-- [ ] Empty states where applicable
-
----
-
-## Common Commands
+## Key Commands
 
 ```bash
-npm run dev          # Start dev server
+npm run dev          # Start development server
 npm run build        # Production build
-npm run lint         # Check for issues
+npm run lint         # Run ESLint
+npm run lint:fix     # Fix ESLint issues
+npm run format       # Format with Prettier
+npm run typecheck    # TypeScript check
+npm run test         # Run tests (watch mode)
+npm run test:run     # Run tests once
 ```
 
----
-
-## Environment Variables
-
-Required in `.env.local`:
+## Project Structure
 
 ```
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-NEXT_PUBLIC_APP_NAME=
-NEXT_PUBLIC_APP_URL=
+src/
+├── app/              # Next.js App Router pages
+│   ├── api/          # API routes
+│   ├── (auth)/       # Auth-related pages
+│   └── (dashboard)/  # Dashboard pages
+├── components/
+│   ├── ui/           # shadcn/ui components
+│   └── features/     # Feature-specific components
+├── lib/
+│   ├── supabase/     # Supabase clients
+│   └── utils.ts      # Utility functions
+├── hooks/            # Custom React hooks
+└── types/            # TypeScript types
 ```
 
----
+## Code Standards
 
-*See docs/LAUNCH-CHECKLIST.md before deploying to production.*
+- **Components:** Functional components with TypeScript interfaces
+- **Styling:** Tailwind CSS with shadcn/ui components
+- **State:** useState/useReducer for local, Context for shared
+- **Data Fetching:** Server Components where possible
+- **Forms:** react-hook-form + zod validation
+
+## Database
+
+- **Provider:** Supabase (PostgreSQL)
+- **Client:** `createClient()` from `@/lib/supabase/server` (server) or `client` (browser)
+- **Migrations:** `supabase/migrations/`
+
+## Before Committing
+
+1. Run `npm run lint:fix`
+2. Run `npm run typecheck`
+3. Run `npm run test:run`
+4. Self-review changes
+
+## Current Focus
+
+<!-- Update this section with current sprint/milestone -->
+
+- [ ] Current task 1
+- [ ] Current task 2
+- [ ] Current task 3
+
+## Notes
+
+<!-- Add project-specific notes, gotchas, or decisions -->
