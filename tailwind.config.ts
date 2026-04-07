@@ -13,20 +13,16 @@ const config: Config = {
     extend: {
       // ─── FFTC Brand Colors ───────────────────────────
       colors: {
-        // Primary — used for CTAs, active states, links
-        brand: {
-          50: "#eef2ff",
-          100: "#e0e7ff",
-          200: "#c7d2fe",
-          300: "#a5b4fc",
-          400: "#818cf8",
-          500: "#6366f1", // primary
-          600: "#4f46e5",
-          700: "#4338ca",
-          800: "#3730a3",
-          900: "#312e81",
-          950: "#1e1b4b",
-        },
+        // Primary FFTC brand
+        "fftc-yellow": "#FFD230",
+        "fftc-black": "#0D0D0D",
+        "fftc-white": "#FEFAF1",
+        // Secondary — NYC subway inspired
+        "secondary-orange": "#FF6A00",
+        "secondary-pink": "#FC4FAC",
+        "secondary-green": "#58DF55",
+        "secondary-blue": "#1E72EF",
+        "secondary-red": "#FA3C2F",
         // Government neutral — backgrounds, borders, text
         gov: {
           50: "#f8fafc",
@@ -84,7 +80,7 @@ const config: Config = {
 
       // ─── Typography ──────────────────────────────────
       fontFamily: {
-        sans: ["Inter", "system-ui", ...fontFamily.sans],
+        sans: ["Helvetica Neue", "Helvetica", "Arial", ...fontFamily.sans],
         mono: ["JetBrains Mono", ...fontFamily.mono],
       },
       fontSize: {
