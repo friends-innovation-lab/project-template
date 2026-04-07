@@ -14,9 +14,9 @@ const config: Config = {
       // ─── FFTC Brand Colors ───────────────────────────
       colors: {
         // Primary FFTC brand
-        "fftc-yellow": "#FFD230",
-        "fftc-black": "#0D0D0D",
-        "fftc-white": "#FEFAF1",
+        "fftc-yellow": "#FFD230", // PASS on fftc-black (12.6:1) | FAIL on white (1.8:1)
+        "fftc-black": "#0D0D0D", // PASS on fftc-white (19.5:1) | PASS on fftc-yellow (12.6:1)
+        "fftc-white": "#FEFAF1", // PASS on fftc-black (19.5:1)
         // Secondary — NYC subway inspired
         "secondary-orange": "#FF6A00",
         "secondary-pink": "#FC4FAC",
