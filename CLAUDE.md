@@ -5,6 +5,37 @@
 
 ---
 
+## Quick Setup Checklist
+
+When starting work on a new feature or fix:
+
+1. Make sure you're on the `develop` branch, not `main`
+2. Run `npm run check` — must pass before any changes
+3. Check `## Current Focus` at the bottom for active priorities
+
+## New Packages
+
+Before installing any new package:
+
+- Check if the functionality already exists in the current stack
+- Prefer packages already used in this template (zod, react-hook-form, etc.)
+- Run `npm run check` after installing to ensure nothing broke
+
+## Environment Variables
+
+- Never hardcode values that should be environment variables
+- All new env vars must be added to `.env.example` with a description
+- Server-only vars (no `NEXT_PUBLIC_` prefix) must never be used in client components
+
+## Supabase Rules
+
+- RLS must be enabled on every new table — no exceptions
+- Always use `createServerClient` in Server Components and API routes
+- Always use `createBrowserClient` in Client Components
+- Never use the service role key in client-side code
+
+---
+
 ## Project Overview
 
 **[PROJECT_NAME]** — [Brief description]
@@ -55,10 +86,13 @@ src/
 ### Critical Rules
 
 1. **No server-side redirects on landing pages**
+
    ```typescript
    // ❌ NEVER do this - causes cold start delays
-   import { redirect } from 'next/navigation'
-   export default function Page() { redirect('/login') }
+   import { redirect } from "next/navigation";
+   export default function Page() {
+     redirect("/login");
+   }
 
    // ✅ Use next.config.js redirects instead (edge, instant)
    ```
@@ -92,6 +126,7 @@ src/
 When asked to review code, UI, or features, evaluate from these perspectives:
 
 ### 🎯 Product Manager
+
 - Does this meet the stated requirements?
 - What edge cases are unhandled?
 - Is this the MVP or are we over-engineering?
@@ -100,12 +135,14 @@ When asked to review code, UI, or features, evaluate from these perspectives:
 - Is this shippable for a demo tomorrow?
 
 ### 💼 Business Analyst
+
 - Does this solve the user's actual problem?
 - What assumptions are we making about user behavior?
 - Is there a simpler way to achieve the same outcome?
 - What's the ROI of this feature vs. effort to build it?
 
 ### 🔬 UX Researcher
+
 - What user need does this address?
 - What research or evidence supports this design decision?
 - What assumptions are we making that we should validate?
@@ -113,6 +150,7 @@ When asked to review code, UI, or features, evaluate from these perspectives:
 - What would a usability test reveal?
 
 ### 🧭 UX Designer
+
 - Can a user complete their goal in 3 clicks or less?
 - Is the information architecture intuitive?
 - Are there unnecessary friction points?
@@ -121,6 +159,7 @@ When asked to review code, UI, or features, evaluate from these perspectives:
 - Does the flow match user mental models?
 
 ### 🎨 UI Designer
+
 - Is the visual hierarchy clear? (What do you see first, second, third?)
 - Are spacing and alignment consistent?
 - Does typography guide the eye appropriately?
@@ -130,6 +169,7 @@ When asked to review code, UI, or features, evaluate from these perspectives:
 - Is it consistent with the rest of the app?
 
 ### ♿ Accessibility Specialist
+
 - Does this meet WCAG 2.1 AA standards?
 - Is color contrast sufficient (4.5:1 for text)?
 - Can this be navigated with keyboard only?
@@ -139,6 +179,7 @@ When asked to review code, UI, or features, evaluate from these perspectives:
 - Are touch targets at least 44x44px?
 
 ### 💻 Frontend Developer
+
 - Is the code clean and maintainable?
 - Are components appropriately sized (not too big, not too granular)?
 - Is state management appropriate for the complexity?
@@ -147,6 +188,7 @@ When asked to review code, UI, or features, evaluate from these perspectives:
 - Would a new developer understand this code?
 
 ### 🏗️ Solutions Architect
+
 - Is this the right technical approach for the problem?
 - Will this scale if usage grows 10x?
 - Are we creating technical debt we'll regret?
@@ -154,6 +196,7 @@ When asked to review code, UI, or features, evaluate from these perspectives:
 - Are there simpler alternatives we should consider?
 
 ### 🔧 DevOps Engineer
+
 - Will this deploy cleanly?
 - Are there cold start concerns?
 - Is error logging/monitoring in place?
@@ -161,6 +204,7 @@ When asked to review code, UI, or features, evaluate from these perspectives:
 - Is this secure in production?
 
 ### 🔒 Security Reviewer
+
 - Is authentication/authorization handled correctly?
 - Is user input validated and sanitized?
 - Are there any data exposure risks?
@@ -168,6 +212,7 @@ When asked to review code, UI, or features, evaluate from these perspectives:
 - Would this pass a basic penetration test?
 
 ### 🧪 QA Tester
+
 - What happens if the user does something unexpected?
 - What if the API is slow or fails?
 - What if the user has no data yet (empty states)?
@@ -177,6 +222,7 @@ When asked to review code, UI, or features, evaluate from these perspectives:
 - Have all the sad paths been tested?
 
 ### 📝 Technical Writer
+
 - Is this feature documented?
 - Could someone else maintain this code?
 - Are complex functions commented?
@@ -184,6 +230,7 @@ When asked to review code, UI, or features, evaluate from these perspectives:
 - Would a handoff to another team be smooth?
 
 ### 🤝 Client Success Manager
+
 - Will the client understand how to use this?
 - What questions will they ask?
 - Does this look professional enough for a client demo?
@@ -197,18 +244,21 @@ When asked to review code, UI, or features, evaluate from these perspectives:
 When building for government clients, also consider:
 
 ### 📋 Contracting Officer Perspective
+
 - Does this align with the Statement of Work?
 - Are there any scope creep concerns?
 - Would this raise questions during a contract review?
 - Is the deliverable clearly defined?
 
 ### 🏛️ Federal User Advocate
+
 - Government employees have specific constraints (older browsers, locked-down machines)
 - They may have limited tech savviness
 - They're risk-averse — anything confusing will get escalated
 - They need to justify their decisions to supervisors
 
 ### 🛡️ ATO/Compliance Reviewer
+
 - Is this FedRAMP-ready (or on a path to it)?
 - Does it meet Section 508 accessibility requirements?
 - Is there an audit trail for sensitive actions?
@@ -222,6 +272,7 @@ When building for government clients, also consider:
 Use these commands to trigger specific reviews:
 
 ### Full Council Review
+
 ```
 Review this as the full council. I want perspectives from: PM, UX Designer,
 UI Designer, Accessibility, Frontend Dev, and QA. Be critical — this is
@@ -229,24 +280,28 @@ going to a client.
 ```
 
 ### Quick Design Review
+
 ```
 Review this UI as a designer council: UX Designer, UI Designer, and
 Accessibility Specialist. Focus on what would make a user frustrated.
 ```
 
 ### Code Review
+
 ```
 Review this code as: Frontend Developer, Solutions Architect, and Security
 Reviewer. Flag anything that would embarrass us in a code review.
 ```
 
 ### Pre-Demo Review
+
 ```
 Review this as if the client demo is in 1 hour. What would make us look
 bad? What would make us look great? Prioritize the fixes.
 ```
 
 ### Government Compliance Review
+
 ```
 Review this for government readiness: Accessibility Specialist, Security
 Reviewer, and ATO Compliance. What would block us from shipping to a
@@ -260,6 +315,7 @@ federal client?
 Before marking any feature complete:
 
 ### Must Have (Blocking)
+
 - [ ] No TypeScript errors
 - [ ] No console errors in browser
 - [ ] Works on mobile (375px)
@@ -269,6 +325,7 @@ Before marking any feature complete:
 - [ ] Basic keyboard navigation works
 
 ### Should Have (Pre-Demo)
+
 - [ ] Passes Lighthouse accessibility audit (90+)
 - [ ] No obvious UI jank or layout shifts
 - [ ] Copy is proofread (no lorem ipsum, no typos)
@@ -276,6 +333,7 @@ Before marking any feature complete:
 - [ ] Tested in Chrome and Safari
 
 ### Nice to Have (Polish)
+
 - [ ] Smooth animations/transitions
 - [ ] Optimistic UI updates
 - [ ] Thoughtful micro-interactions

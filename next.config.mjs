@@ -1,22 +1,33 @@
+import { withSentryConfig } from '@sentry/nextjs'
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Strict mode for catching bugs
+  // Strict mode catches potential issues early
   reactStrictMode: true,
 
-  // Image optimization
-  images: {
-    remotePatterns: [
+  // Security headers for government-appropriate deployments
+  async headers() {
+    return [
       {
-        protocol: 'https',
-        hostname: '*.supabase.co',
+        source: '/(.*)',
+        headers: [
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+        ],
       },
-    ],
+    ]
   },
-
-  // Experimental features (uncomment as needed)
-  // experimental: {
-  //   typedRoutes: true,
-  // },
 }
 
-export default nextConfig
+export default withSentryConfig(nextConfig, {
+  // Sentry build options
+  silent: true,
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+}, {
+  // Sentry runtime options
+  hideSourceMaps: true,
+  disableLogger: true,
+})

@@ -1,0 +1,34 @@
+import { cn } from "@/lib/utils";
+
+interface EmptyStateProps {
+  title: string;
+  description?: string;
+  action?: React.ReactNode;
+  className?: string;
+}
+
+export function EmptyState({
+  title,
+  description,
+  action,
+  className,
+}: EmptyStateProps) {
+  return (
+    <div
+      className={cn(
+        "flex min-h-[400px] flex-col items-center justify-center rounded-lg border border-dashed border-border p-8 text-center",
+        className,
+      )}
+      role="status"
+      aria-label={title}
+    >
+      <h3 className="text-lg font-semibold text-foreground">{title}</h3>
+      {description && (
+        <p className="mt-2 text-sm text-muted-foreground max-w-sm">
+          {description}
+        </p>
+      )}
+      {action && <div className="mt-6">{action}</div>}
+    </div>
+  );
+}
