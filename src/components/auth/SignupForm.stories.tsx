@@ -7,6 +7,12 @@ const meta: Meta<typeof SignupForm> = {
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
+    nextjs: {
+      appDirectory: true,
+      navigation: {
+        pathname: "/signup",
+      },
+    },
   },
 };
 
