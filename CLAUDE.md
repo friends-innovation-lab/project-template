@@ -121,6 +121,46 @@ src/
 
 ---
 
+## Visual Design Rules
+
+Read these before building any UI component or page.
+
+FOUNDATION
+
+- Landing pages and hero sections: fftc-black (#0D0D0D) background
+- App pages (forms, steps, results, detail): fftc-white (#FEFAF1) warm off-white background
+- Headers: always fftc-black, full width, never light colored
+- FFTC logo mark: always yellow on black — never inverted
+
+COLOR USAGE
+
+- fftc-yellow: primary CTA buttons, progress bars, active/selected states, key accent moments only
+- fftc-yellow text on white or light backgrounds FAILS contrast — never use yellow as a text color
+- fftc-black text on fftc-yellow buttons — always
+- Secondary colors (orange, pink, green, blue, red): category badges and accents only — not backgrounds or body text
+
+TYPOGRAPHY
+
+- Headlines on dark backgrounds: white, Helvetica Neue Bold
+- Headlines on light backgrounds: fftc-black, Helvetica Neue Bold
+- Body text: gov-800 on light backgrounds, white on dark
+- Never use fftc-yellow as a text color
+
+BUTTONS
+
+- Primary action: fftc-yellow background, fftc-black text
+- Secondary/back: light border, fftc-black text
+- Destructive: status/error background, white text
+
+OVERALL FEEL
+
+- Bold and high contrast — think NYC subway signage
+- Not corporate blue, not generic gray, not safe beige
+- Yellow and black are the dominant visual story
+- Every screen should feel like it came from the same design system
+
+---
+
 ## Review Council
 
 When asked to review code, UI, or features, evaluate from these perspectives:
