@@ -49,14 +49,17 @@ Before installing any new package:
 ## Key Commands
 
 ```bash
-npm run dev          # Start development server
-npm run build        # Production build
-npm run lint         # Run ESLint
-npm run lint:fix     # Fix ESLint issues
-npm run format       # Format with Prettier
-npm run typecheck    # TypeScript check
-npm run test         # Run tests (watch mode)
-npm run test:run     # Run tests once
+npm run dev              # Start development server
+npm run build            # Production build
+npm run lint             # Run ESLint
+npm run lint:fix         # Fix ESLint issues
+npm run format           # Format with Prettier
+npm run typecheck        # TypeScript check
+npm run test             # Run tests (watch mode)
+npm run test:run         # Run tests once
+npm run storybook        # Start Storybook dev server (port 6006)
+npm run storybook:build  # Build static Storybook
+npm run storybook:test   # Run accessibility tests on all stories
 ```
 
 ---
