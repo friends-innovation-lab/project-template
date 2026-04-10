@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 import tailwindcssAnimate from "tailwindcss-animate";
+import tokens from "./tokens.json";
 
 const config: Config = {
   darkMode: ["class"],
@@ -12,36 +13,40 @@ const config: Config = {
   theme: {
     extend: {
       // ─── FFTC Brand Colors ───────────────────────────
+      // Token values imported from tokens.json
+      // To update tokens: edit tokens.json directly
+      // When Tokens Studio is connected, this file will be
+      // updated automatically via GitHub sync
       colors: {
         // Primary FFTC brand
-        "fftc-yellow": "#FFD230", // PASS on fftc-black (12.6:1) | FAIL on white (1.8:1)
-        "fftc-black": "#0D0D0D", // PASS on fftc-white (19.5:1) | PASS on fftc-yellow (12.6:1)
-        "fftc-white": "#FEFAF1", // PASS on fftc-black (19.5:1)
+        "fftc-yellow": tokens.fftc.yellow.value,
+        "fftc-black": tokens.fftc.black.value,
+        "fftc-white": tokens.fftc.white.value,
         // Secondary — NYC subway inspired
-        "secondary-orange": "#FF6A00",
-        "secondary-pink": "#FC4FAC",
-        "secondary-green": "#58DF55",
-        "secondary-blue": "#1E72EF",
-        "secondary-red": "#FA3C2F",
+        "secondary-orange": tokens.secondary.orange.value,
+        "secondary-pink": tokens.secondary.pink.value,
+        "secondary-green": tokens.secondary.green.value,
+        "secondary-blue": tokens.secondary.blue.value,
+        "secondary-red": tokens.secondary.red.value,
         // Government neutral — backgrounds, borders, text
         gov: {
-          50: "#f8fafc",
-          100: "#f1f5f9",
-          200: "#e2e8f0",
-          300: "#cbd5e1",
-          400: "#94a3b8",
-          500: "#64748b",
-          600: "#475569",
-          700: "#334155",
-          800: "#1e293b",
-          900: "#0f172a",
-          950: "#020617",
+          50: tokens.gov["50"].value,
+          100: tokens.gov["100"].value,
+          200: tokens.gov["200"].value,
+          300: tokens.gov["300"].value,
+          400: tokens.gov["400"].value,
+          500: tokens.gov["500"].value,
+          600: tokens.gov["600"].value,
+          700: tokens.gov["700"].value,
+          800: tokens.gov["800"].value,
+          900: tokens.gov["900"].value,
+          950: tokens.gov["950"].value,
         },
         // Status colors — accessible contrast ratios baked in
-        success: "#16a34a",
-        warning: "#d97706",
-        error: "#dc2626",
-        info: "#0284c7",
+        success: tokens.status.success.value,
+        warning: tokens.status.warning.value,
+        error: tokens.status.error.value,
+        info: tokens.status.info.value,
 
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -80,8 +85,8 @@ const config: Config = {
 
       // ─── Typography ──────────────────────────────────
       fontFamily: {
-        sans: ["Helvetica Neue", "Helvetica", "Arial", ...fontFamily.sans],
-        mono: ["JetBrains Mono", ...fontFamily.mono],
+        sans: [tokens.font.sans.value.split(", ")[0], ...fontFamily.sans],
+        mono: [tokens.font.mono.value.split(", ")[0], ...fontFamily.mono],
       },
       fontSize: {
         // Slightly tighter scale for data-dense gov interfaces
