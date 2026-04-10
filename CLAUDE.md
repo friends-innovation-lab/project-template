@@ -167,13 +167,59 @@ GOVERNMENT AGENCY PROJECTS
 
 When NEXT_PUBLIC_AGENCY_THEME is va, uswds, or cms:
 
-- Use @trussworks/react-uswds components for all form elements
-  (Button, TextInput, Radio, Checkbox, Select, Alert, StepIndicator)
-- Import directly: import { Button } from '@trussworks/react-uswds'
-- These output real USWDS-compliant HTML that federal evaluators
-  will recognize
-- For non-form UI (layout, cards, navigation) shadcn/ui is fine
-- Never mix USWDS and shadcn form components on the same form
+Use @trussworks/react-uswds components for all UI on government
+agency projects. Import directly:
+import { ComponentName } from '@trussworks/react-uswds'
+
+Available components by category:
+
+CONTENT AND LAYOUT
+
+- Accordion / AccordionItem
+- GovBanner (required on official government pages)
+- Card / CardGroup / CardHeader / CardBody / CardFooter
+- ProcessList / ProcessListItem
+- SiteAlert
+- Tag
+
+FORMS
+
+- Button / ButtonGroup
+- CharacterCount
+- Checkbox
+- ComboBox
+- DatePicker
+- DateRangePicker
+- FileInput
+- Form / FormGroup
+- Label / ErrorMessage
+- Radio
+- Select
+- Textarea
+- TextInput
+- TimePicker
+
+NAVIGATION
+
+- Breadcrumb / BreadcrumbBar / BreadcrumbLink
+- SideNav
+- StepIndicator / StepIndicatorStep
+
+FEEDBACK
+
+- Alert
+
+OVERLAYS
+
+- Modal / ModalHeading / ModalFooter / ModalToggleButton
+- Tooltip
+
+TABLES
+
+- Table
+
+FULL REFERENCE
+https://trussworks.github.io/react-uswds/
 
 FFTC BRAND PROJECTS
 
