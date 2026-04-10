@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Alert } from "@trussworks/react-uswds";
-import "@trussworks/react-uswds/lib/index.css";
 
 const meta: Meta<typeof Alert> = {
   title: "USWDS/Alert",

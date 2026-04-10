@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Button } from "@trussworks/react-uswds";
-import "@trussworks/react-uswds/lib/index.css";
 
 const meta: Meta<typeof Button> = {
   title: "USWDS/Button",

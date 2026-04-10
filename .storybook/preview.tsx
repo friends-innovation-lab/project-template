@@ -1,6 +1,6 @@
 import type { Preview } from "@storybook/nextjs-vite";
 import React from "react";
-import "@trussworks/react-uswds/lib/index.css";
+import "@trussworks/react-uswds/lib/uswds.css";
 import "../src/app/globals.css";
 import { themes } from "./themes";
 

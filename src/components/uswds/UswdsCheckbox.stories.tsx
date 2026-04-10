@@ -1,6 +1,5 @@
 import type { Meta } from "@storybook/nextjs-vite";
 import { Checkbox, Fieldset } from "@trussworks/react-uswds";
-import "@trussworks/react-uswds/lib/index.css";
 
 const meta: Meta = {
   title: "USWDS/Checkbox",

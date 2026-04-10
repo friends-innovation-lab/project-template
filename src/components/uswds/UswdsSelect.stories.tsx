@@ -1,6 +1,5 @@
 import type { Meta } from "@storybook/nextjs-vite";
 import { Select, Label, FormGroup } from "@trussworks/react-uswds";
-import "@trussworks/react-uswds/lib/index.css";
 
 const meta: Meta = {
   title: "USWDS/Select",
