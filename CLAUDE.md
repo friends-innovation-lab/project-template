@@ -60,6 +60,7 @@ npm run test:run         # Run tests once
 npm run storybook        # Start Storybook dev server (port 6006)
 npm run storybook:build  # Build static Storybook
 npm run storybook:test   # Run accessibility tests on all stories
+                         # USWDS components are in the USWDS/ section
 ```
 
 ---
@@ -161,6 +162,25 @@ OVERALL FEEL
 - Not corporate blue, not generic gray, not safe beige
 - Yellow and black are the dominant visual story
 - Every screen should feel like it came from the same design system
+
+GOVERNMENT AGENCY PROJECTS
+
+When NEXT_PUBLIC_AGENCY_THEME is va, uswds, or cms:
+
+- Use @trussworks/react-uswds components for all form elements
+  (Button, TextInput, Radio, Checkbox, Select, Alert, StepIndicator)
+- Import directly: import { Button } from '@trussworks/react-uswds'
+- These output real USWDS-compliant HTML that federal evaluators
+  will recognize
+- For non-form UI (layout, cards, navigation) shadcn/ui is fine
+- Never mix USWDS and shadcn form components on the same form
+
+FFTC BRAND PROJECTS
+
+When NEXT_PUBLIC_AGENCY_THEME is fftc or unset:
+
+- Use shadcn/ui components throughout
+- Do not import @trussworks/react-uswds
 
 ---
 
