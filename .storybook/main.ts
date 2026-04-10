@@ -13,6 +13,18 @@ const config: StorybookConfig = {
   docs: {
     autodocs: "tag",
   },
+  viteFinal: async (config) => {
+    config.define = {
+      ...config.define,
+      "process.env.NEXT_PUBLIC_SUPABASE_URL": JSON.stringify(
+        "http://localhost:54321",
+      ),
+      "process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY": JSON.stringify(
+        "mock-anon-key-for-storybook",
+      ),
+    };
+    return config;
+  },
 };
 
 export default config;
