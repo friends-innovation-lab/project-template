@@ -1,0 +1,41 @@
+{
+  "_meta": {
+    "name": "CMS Design System",
+    "description": "Centers for Medicare and Medicaid Services design system tokens"
+  },
+  "primary": {
+    "default": { "value": "#0071bc", "type": "color" },
+    "dark": { "value": "#205493", "type": "color" },
+    "darker": { "value": "#112e51", "type": "color" },
+    "light": { "value": "#e1f3f8", "type": "color" }
+  },
+  "secondary": {
+    "default": { "value": "#e31c3d", "type": "color" },
+    "dark": { "value": "#981b1e", "type": "color" },
+    "light": { "value": "#f9dede", "type": "color" }
+  },
+  "accent": {
+    "cool": { "value": "#02bfe7", "type": "color" },
+    "warm": { "value": "#fdb81e", "type": "color" }
+  },
+  "base": {
+    "lightest": { "value": "#f1f1f1", "type": "color" },
+    "lighter": { "value": "#d6d7d9", "type": "color" },
+    "light": { "value": "#aeb0b5", "type": "color" },
+    "default": { "value": "#757575", "type": "color" },
+    "dark": { "value": "#5b616b", "type": "color" },
+    "darker": { "value": "#494440", "type": "color" },
+    "darkest": { "value": "#212121", "type": "color" }
+  },
+  "font": {
+    "sans": {
+      "value": "Open Sans, Helvetica Neue, Arial, sans-serif",
+      "type": "fontFamily"
+    },
+    "serif": { "value": "Merriweather, Georgia, serif", "type": "fontFamily" },
+    "mono": { "value": "Source Code Pro, monospace", "type": "fontFamily" }
+  },
+  "background": { "value": "#ffffff", "type": "color" },
+  "cta": { "value": "#0071bc", "type": "color" },
+  "cta-text": { "value": "#ffffff", "type": "color" }
+}

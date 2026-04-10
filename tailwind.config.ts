@@ -48,6 +48,15 @@ const config: Config = {
         error: tokens.status.error.value,
         info: tokens.status.info.value,
 
+        // Agency theme colors — set dynamically by the active agency theme
+        // (fftc, uswds, va, or cms) via CSS variables injected at runtime
+        "agency-primary": "var(--agency-primary)",
+        "agency-primary-dark": "var(--agency-primary-dark)",
+        "agency-secondary": "var(--agency-secondary)",
+        "agency-cta": "var(--agency-cta)",
+        "agency-cta-text": "var(--agency-cta-text)",
+        "agency-background": "var(--agency-background)",
+
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

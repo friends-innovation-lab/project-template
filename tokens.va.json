@@ -1,0 +1,41 @@
+{
+  "_meta": {
+    "name": "VA Design System",
+    "description": "Department of Veterans Affairs design system tokens"
+  },
+  "primary": {
+    "default": { "value": "#003e73", "type": "color" },
+    "dark": { "value": "#002a52", "type": "color" },
+    "darker": { "value": "#001938", "type": "color" },
+    "light": { "value": "#e1f3f8", "type": "color" }
+  },
+  "secondary": {
+    "default": { "value": "#005EA2", "type": "color" },
+    "dark": { "value": "#1a4480", "type": "color" },
+    "light": { "value": "#d9e8f6", "type": "color" }
+  },
+  "accent": {
+    "cool": { "value": "#00bde3", "type": "color" },
+    "warm": { "value": "#fa9441", "type": "color" }
+  },
+  "base": {
+    "lightest": { "value": "#f0f0f0", "type": "color" },
+    "lighter": { "value": "#dfe1e2", "type": "color" },
+    "light": { "value": "#a9aeb1", "type": "color" },
+    "default": { "value": "#71767a", "type": "color" },
+    "dark": { "value": "#565c65", "type": "color" },
+    "darker": { "value": "#3d4551", "type": "color" },
+    "darkest": { "value": "#1b1b1b", "type": "color" }
+  },
+  "font": {
+    "sans": {
+      "value": "Source Sans Pro, Helvetica Neue, Arial, sans-serif",
+      "type": "fontFamily"
+    },
+    "serif": { "value": "Bitter, Georgia, serif", "type": "fontFamily" },
+    "mono": { "value": "Source Code Pro, monospace", "type": "fontFamily" }
+  },
+  "background": { "value": "#ffffff", "type": "color" },
+  "cta": { "value": "#003e73", "type": "color" },
+  "cta-text": { "value": "#ffffff", "type": "color" }
+}
