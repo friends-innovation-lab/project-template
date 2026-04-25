@@ -46,6 +46,28 @@ Before installing any new package:
 
 ---
 
+## Lab Standards
+
+This project complies with the Friends Innovation Lab engineering standards. The full standards live at https://github.com/friends-innovation-lab/lab-standards and are mirrored into this repo at `/docs/standards/` by the spinup script.
+
+The nine standards govern:
+
+| Standard                     | Governs                                                |
+| ---------------------------- | ------------------------------------------------------ |
+| `STANDARDS-INDEX.md`         | Master orchestration — start here                      |
+| `ENTERPRISE-READINESS.md`    | Security, compliance, multi-tenancy, vendor management |
+| `PERFORMANCE.md`             | Performance budgets, Core Web Vitals                   |
+| `ENGINEERING-OPERATIONS.md`  | CI/CD, branching, code review, releases                |
+| `DATA-GOVERNANCE.md`         | Data classification, retention, PII handling           |
+| `ACCESSIBILITY.md`           | WCAG 2.2 AA, Section 508, VPAT                         |
+| `ARCHITECTURE-DECISIONS.md`  | When and how to write ADRs                             |
+| `RETROFIT-PLAYBOOK.md`       | Bringing existing projects to standard                 |
+| `AI-ASSISTED-DEVELOPMENT.md` | Working with AI tools and agents                       |
+
+Project-specific deviations from any standard require an ADR in `/docs/decisions/` citing the standard being deviated from. See `/docs/decisions/README.md` for the ADR process.
+
+---
+
 ## Key Commands
 
 ```bash
@@ -456,6 +478,17 @@ Before marking any feature complete:
 2. Run `npm run typecheck`
 3. Run `npm run test:run`
 4. Self-review changes
+
+---
+
+## When You're Stuck
+
+- The PRD answers "what should this do" — `/docs/prd.md`
+- The lab standards answer "how must this be built" — `/docs/standards/`
+- ADRs answer "why is it built this way" — `/docs/decisions/`
+- The CLAUDE.md you're reading answers "what conventions does this project follow"
+
+When the standards and a project-specific need conflict, write an ADR documenting the deviation. Don't quietly diverge.
 
 ---
 
