@@ -1,0 +1,54 @@
+# lab-templates/workflows/bundle-budget.yml
+# Implements: PERFORMANCE.md → "Bundle size budget"
+# Runs: size-limit against production build, fails if budget exceeded
+
+name: Bundle Budget
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  size:
+    name: Check Bundle Size
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          NEXT_PUBLIC_APP_URL: http://localhost:3000
+
+      - name: Check bundle size
+        uses: andresz1/size-limit-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Reads budget from .size-limit.json in project root
+          # Example .size-limit.json:
+          # [
+          #   {
+          #     "path": ".next/static/**/*.js",
+          #     "limit": "300 KB"
+          #   }
+          # ]
+
+# To set up size-limit in your project:
+# 1. npm install --save-dev size-limit @size-limit/preset-app
+# 2. Create .size-limit.json with your budgets
+# 3. Add to package.json scripts: "size": "size-limit"
+#
+# See PERFORMANCE.md for recommended budget thresholds

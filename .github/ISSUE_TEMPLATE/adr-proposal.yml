@@ -1,0 +1,92 @@
+name: ADR Proposal
+description: Propose a significant architectural or technical decision
+title: "[ADR]: "
+labels: ["adr", "architecture", "discussion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to propose an Architecture Decision Record (ADR).
+        See ARCHITECTURE-DECISIONS.md for guidance on when ADRs are needed.
+
+  - type: input
+    id: title
+    attributes:
+      label: Decision title
+      description: Short, descriptive title for the decision
+      placeholder: Use X for Y
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What situation or problem motivates this decision?
+      placeholder: |
+        We need to choose a database for storing user data.
+        Requirements include:
+        - High availability
+        - ACID compliance
+        - ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: decision
+    attributes:
+      label: Proposed decision
+      description: What do you propose we do?
+      placeholder: Use PostgreSQL via Supabase because...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What other options were evaluated?
+      placeholder: |
+        1. **MySQL** — Considered because... Rejected because...
+        2. **MongoDB** — Considered because... Rejected because...
+    validations:
+      required: true
+
+  - type: textarea
+    id: consequences
+    attributes:
+      label: Consequences
+      description: What are the positive, negative, and neutral consequences of this decision?
+      placeholder: |
+        **Positive:**
+        - Benefit one
+
+        **Negative:**
+        - Tradeoff one
+
+        **Neutral:**
+        - Observation
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: standards
+    attributes:
+      label: Standards alignment
+      description: Does this decision align with lab standards?
+      options:
+        - label: Reviewed ENTERPRISE-READINESS.md requirements
+        - label: Reviewed DATA-GOVERNANCE.md requirements
+        - label: No conflicts with existing standards identified
+        - label: Deviation from standard required (explain in context)
+    validations:
+      required: true
+
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Links to relevant documentation, prior art, or research
+      placeholder: |
+        - Link to vendor docs
+        - Link to comparison article

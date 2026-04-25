@@ -1,0 +1,67 @@
+# .gitleaks.toml
+# Implements: ENTERPRISE-READINESS.md → "Pre-commit secret scanning"
+# Documentation: https://github.com/gitleaks/gitleaks
+
+# This configuration extends gitleaks' built-in rules.
+# The default ruleset catches most common secret patterns.
+# Use the [allowlist] section to suppress false positives.
+
+title = "Friends Innovation Lab - Gitleaks Config"
+
+# Use the default gitleaks rules
+# See: https://github.com/gitleaks/gitleaks/blob/master/config/gitleaks.toml
+
+[extend]
+# Extend the default configuration
+useDefault = true
+
+# Custom rules for project-specific patterns
+# [[rules]]
+# id = "custom-api-key"
+# description = "Custom API Key Pattern"
+# regex = '''MYSERVICE_[A-Za-z0-9]{32}'''
+# tags = ["api-key", "custom"]
+
+# Allowlist for false positives
+[allowlist]
+description = "Global allowlist"
+
+# Paths to ignore (e.g., test fixtures, documentation)
+paths = [
+    '''\.github/workflows/.*\.yml$''',  # Workflow files may have placeholder patterns
+    '''docs/.*\.md$''',                  # Documentation examples
+    '''.*_test\.go$''',                  # Go test files
+    '''.*\.test\.(ts|js)$''',            # JS/TS test files
+    '''.*\.spec\.(ts|js)$''',            # Spec files
+]
+
+# Specific commits to ignore (use sparingly)
+# commits = [
+#     "abc123def456...",
+# ]
+
+# Regex patterns to ignore (use sparingly, prefer path-based allowlisting)
+# regexes = [
+#     '''example-api-key-[a-z]+''',
+# ]
+
+# Per-rule allowlists
+# [[rules]]
+# id = "generic-api-key"
+# [rules.allowlist]
+# paths = [
+#     '''config/example\.json$''',
+# ]
+
+# Entropy thresholds (advanced - usually not needed)
+# [rules.entropy]
+# min = 4.0
+# max = 8.0
+# group = 0
+
+# How to add a false positive exclusion:
+# 1. Identify the rule ID from gitleaks output
+# 2. Add a path pattern above if it's file-specific
+# 3. Or add a regex pattern if it's content-specific
+# 4. Document WHY this is a false positive in a comment
+# 5. Prefer narrow exclusions over broad ones

@@ -1,0 +1,32 @@
+# CODEOWNERS
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owners for everything in the repo
+* @friends-innovation-lab/leads
+
+# Frontend code
+# /src/components/ @friends-innovation-lab/frontend
+# /src/app/ @friends-innovation-lab/frontend
+
+# Backend code
+# /api/ @friends-innovation-lab/backend
+# /src/lib/ @friends-innovation-lab/backend
+
+# Infrastructure and CI
+# /.github/ @friends-innovation-lab/leads
+# /infrastructure/ @friends-innovation-lab/leads
+
+# Documentation
+# /docs/ @friends-innovation-lab/leads
+
+# Security-sensitive files (require lead review)
+# /src/lib/auth/ @friends-innovation-lab/leads
+# /.env.example @friends-innovation-lab/leads
+# /SECURITY.md @friends-innovation-lab/leads
+
+# ADRs (architecture decisions)
+# /docs/decisions/ @friends-innovation-lab/leads
+
+# Uncomment and customize the patterns above for your project
+# Each line is: <pattern> <owners>
+# Owners are @username or @org/team-name
