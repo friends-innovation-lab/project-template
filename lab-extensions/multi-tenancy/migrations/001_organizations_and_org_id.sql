@@ -4,16 +4,11 @@
 -- Implements: AI-ASSISTED-DEVELOPMENT.md → "Migration discipline"
 -- ============================================
 
--- Configuration flag — set to false for invite-only signup flows
--- This controls whether a personal organization is created on user signup
-DO $$ BEGIN
-  PERFORM set_config('app.create_personal_org_on_signup', 'true', false);
-END $$;
-
 -- ============================================
+-- TABLE CREATION (all tables first, before policies)
+-- ============================================
+
 -- ORGANIZATIONS TABLE
--- ============================================
-
 create table if not exists public.organizations (
   id uuid primary key default gen_random_uuid(),
   slug text unique not null,
@@ -26,7 +21,40 @@ comment on table public.organizations is 'Multi-tenant organizations. Each org i
 comment on column public.organizations.slug is 'URL-safe unique identifier, e.g., acme-corp';
 comment on column public.organizations.deleted_at is 'Soft-delete timestamp. NULL = active, set = deleted.';
 
+-- ORG_MEMBERS TABLE
+create table if not exists public.org_members (
+  org_id uuid not null references public.organizations(id) on delete cascade,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  role text not null check (role in ('owner', 'admin', 'member')),
+  created_at timestamptz not null default now(),
+  primary key (org_id, user_id)
+);
+
+comment on table public.org_members is 'User membership in organizations with role-based access.';
+comment on column public.org_members.role is 'owner: full control, admin: manage members, member: access only';
+
+-- USER_CURRENT_ORG TABLE
+-- Tracks each user's active organization
+-- Using a lookup table instead of set_config() for pgbouncer compatibility
+create table if not exists public.user_current_org (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  org_id uuid not null references public.organizations(id) on delete cascade,
+  updated_at timestamptz not null default now()
+);
+
+comment on table public.user_current_org is 'Tracks which org each user is currently working in. Used by current_org_id() function.';
+
+-- ============================================
+-- ENABLE ROW LEVEL SECURITY (all tables)
+-- ============================================
+
 alter table public.organizations enable row level security;
+alter table public.org_members enable row level security;
+alter table public.user_current_org enable row level security;
+
+-- ============================================
+-- POLICIES: ORGANIZATIONS
+-- ============================================
 
 -- Members can view their own organizations
 create policy "Members can view their organizations"
@@ -52,21 +80,8 @@ create policy "Owners can update their organization"
   );
 
 -- ============================================
--- ORG_MEMBERS TABLE
+-- POLICIES: ORG_MEMBERS
 -- ============================================
-
-create table if not exists public.org_members (
-  org_id uuid not null references public.organizations(id) on delete cascade,
-  user_id uuid not null references auth.users(id) on delete cascade,
-  role text not null check (role in ('owner', 'admin', 'member')),
-  created_at timestamptz not null default now(),
-  primary key (org_id, user_id)
-);
-
-comment on table public.org_members is 'User membership in organizations with role-based access.';
-comment on column public.org_members.role is 'owner: full control, admin: manage members, member: access only';
-
-alter table public.org_members enable row level security;
 
 -- Members can view other members in their orgs
 create policy "Members can view org members"
@@ -92,20 +107,8 @@ create policy "Owners and admins can manage members"
   );
 
 -- ============================================
--- USER_CURRENT_ORG TABLE
--- Tracks each user's active organization
--- Using a lookup table instead of set_config() for pgbouncer compatibility
+-- POLICIES: USER_CURRENT_ORG
 -- ============================================
-
-create table if not exists public.user_current_org (
-  user_id uuid primary key references auth.users(id) on delete cascade,
-  org_id uuid not null references public.organizations(id) on delete cascade,
-  updated_at timestamptz not null default now()
-);
-
-comment on table public.user_current_org is 'Tracks which org each user is currently working in. Used by current_org_id() function.';
-
-alter table public.user_current_org enable row level security;
 
 -- Users can only read/write their own current org
 create policy "Users manage their own current org"
@@ -142,7 +145,12 @@ create index if not exists idx_organizations_not_deleted on public.organizations
 
 -- ============================================
 -- UPDATE HANDLE_NEW_USER TRIGGER
--- Optionally create a personal organization on signup
+-- Creates a personal organization on signup
+--
+-- PATTERN DECISION: Personal org creation is hardcoded to always run.
+-- For invite-only flows where users should NOT get a personal org,
+-- modify this trigger and document the decision in an ADR.
+-- See: lab-extensions/multi-tenancy/README.md
 -- ============================================
 
 -- Drop the existing trigger (will be recreated)
@@ -152,7 +160,6 @@ drop trigger if exists on_auth_user_created on auth.users;
 create or replace function public.handle_new_user()
 returns trigger as $$
 declare
-  create_personal_org boolean;
   new_org_id uuid;
   user_slug text;
 begin
@@ -164,35 +171,27 @@ begin
     new.raw_user_meta_data->>'name'
   );
 
-  -- Check config flag for personal org creation
-  create_personal_org := coalesce(
-    current_setting('app.create_personal_org_on_signup', true)::boolean,
-    true
-  );
+  -- Generate a unique slug from email
+  user_slug := lower(regexp_replace(split_part(new.email, '@', 1), '[^a-z0-9]', '-', 'g'));
+  -- Append random suffix to ensure uniqueness
+  user_slug := user_slug || '-' || substr(gen_random_uuid()::text, 1, 8);
 
-  if create_personal_org then
-    -- Generate a unique slug from email
-    user_slug := lower(regexp_replace(split_part(new.email, '@', 1), '[^a-z0-9]', '-', 'g'));
-    -- Append random suffix to ensure uniqueness
-    user_slug := user_slug || '-' || substr(gen_random_uuid()::text, 1, 8);
+  -- Create personal organization
+  insert into public.organizations (id, slug, name)
+  values (
+    gen_random_uuid(),
+    user_slug,
+    coalesce(new.raw_user_meta_data->>'name', split_part(new.email, '@', 1)) || '''s Workspace'
+  )
+  returning id into new_org_id;
 
-    -- Create personal organization
-    insert into public.organizations (id, slug, name)
-    values (
-      gen_random_uuid(),
-      user_slug,
-      coalesce(new.raw_user_meta_data->>'name', split_part(new.email, '@', 1)) || '''s Workspace'
-    )
-    returning id into new_org_id;
+  -- Add user as owner
+  insert into public.org_members (org_id, user_id, role)
+  values (new_org_id, new.id, 'owner');
 
-    -- Add user as owner
-    insert into public.org_members (org_id, user_id, role)
-    values (new_org_id, new.id, 'owner');
-
-    -- Set as current org
-    insert into public.user_current_org (user_id, org_id)
-    values (new.id, new_org_id);
-  end if;
+  -- Set as current org
+  insert into public.user_current_org (user_id, org_id)
+  values (new.id, new_org_id);
 
   return new;
 end;
