@@ -21,7 +21,8 @@
     "check": "npm run lint && npm run typecheck && npm run test:run",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
-    "storybook:test": "test-storybook"
+    "storybook:test": "test-storybook",
+    "adr:new": "bash scripts/new-adr.sh"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
