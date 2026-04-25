@@ -1,0 +1,84 @@
+name: Bug Report
+description: Report a bug or unexpected behavior
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Please fill out the form below.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear description of the bug
+      placeholder: What happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: How can we reproduce this bug?
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What should have happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What actually happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser, OS, app version, etc.
+      placeholder: |
+        - Browser: Chrome 120
+        - OS: macOS 14.2
+        - App version: v1.2.3
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: Per ENGINEERING-OPERATIONS.md severity levels
+      options:
+        - S1 - Critical (system down, data loss, security breach)
+        - S2 - High (major feature broken, no workaround)
+        - S3 - Medium (feature degraded, workaround exists)
+        - S4 - Low (minor issue, cosmetic)
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Any relevant error messages, console logs, or screenshots
+      placeholder: Paste logs or drag images here
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Any other context about the bug
