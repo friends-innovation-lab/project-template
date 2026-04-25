@@ -85,7 +85,7 @@ src/components/
 
 ## Files Modified
 
-- **`supabase/migrations/00000000000000_baseline.sql`** — The `handle_new_user()` trigger is updated to optionally create a personal organization
+- **`supabase/migrations/00000000000000_baseline.sql`** — The `handle_new_user()` trigger is updated to create a personal organization on signup
 
 ## Important: What This Extension Does NOT Change
 
@@ -95,33 +95,34 @@ src/components/
 
 ## Personal Org Auto-Creation
 
-By default, a personal organization is created for each new user on signup. This can be disabled for invite-only flows.
+By default, a personal organization is created for each new user on signup.
 
-### Configuration
-
-At the top of the migration:
-
-```sql
--- Set to 'false' for invite-only signup flows
-DO $$ BEGIN
-  PERFORM set_config('app.create_personal_org_on_signup', 'true', false);
-END $$;
-```
-
-### Tradeoffs
-
-**Personal org enabled (default):**
+### Default Behavior (enabled)
 
 - Every user has at least one org immediately
 - Simpler onboarding — user can start using the app right away
 - User's personal data has a home org
 - Use for: Consumer-facing SaaS, self-service products
 
-**Personal org disabled:**
+### Disabling Personal Org Creation
 
-- Users must be invited to an existing org
-- Cleaner for B2B products where orgs are created by admins
-- Use for: Enterprise products, invite-only platforms
+For invite-only flows where users should NOT get a personal organization:
+
+1. **Edit the `handle_new_user()` trigger** in `001_organizations_and_org_id.sql`
+2. **Remove or wrap** the personal org creation logic (lines creating organization, org_member, user_current_org)
+3. **Document the decision** in an ADR (see `docs/adr/`)
+
+This pattern is intentionally hardcoded rather than config-flag driven because:
+
+- Config flags via `set_config()` are session-scoped and unreliable across connections
+- Invite-only flows are an architectural decision that should be explicit in code
+- The change is infrequent and warrants an ADR for traceability
+
+**When to disable:**
+
+- Enterprise products where orgs are created by admins
+- Invite-only platforms
+- B2B products without self-service signup
 
 ## Migration Path
 
