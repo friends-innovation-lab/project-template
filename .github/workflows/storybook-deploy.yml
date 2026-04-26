@@ -24,6 +24,9 @@ jobs:
 
       - name: Build Storybook
         run: npm run storybook:build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://dummy.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: dummy
 
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v25

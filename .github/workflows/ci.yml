@@ -57,8 +57,8 @@ jobs:
       - name: Build app
         run: npm run build
         env:
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          NEXT_PUBLIC_SUPABASE_URL: https://dummy.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: dummy
           NEXT_PUBLIC_APP_URL: http://localhost:3000
 
       - name: Run accessibility tests
@@ -94,6 +94,9 @@ jobs:
 
       - name: Build Storybook
         run: npm run storybook:build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://dummy.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: dummy
 
       - name: Upload Storybook
         uses: actions/upload-artifact@v4
