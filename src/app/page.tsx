@@ -27,9 +27,7 @@ export default function HomePage() {
 
       <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
         <div className="text-center">
-          <Badge variant="info" className="mb-4">
-            Veteran Services Portal
-          </Badge>
+          <Badge className="mb-4">Veteran Services Portal</Badge>
           <h1 className="text-4xl font-bold tracking-tight text-gov-900 sm:text-5xl">
             {appName}
           </h1>
@@ -49,7 +47,7 @@ export default function HomePage() {
       </div>
 
       <footer className="border-t border-gov-200 py-8">
-        <div className="mx-auto max-w-7xl px-4 text-center text-sm text-gov-400">
+        <div className="mx-auto max-w-7xl px-4 text-center text-sm text-gov-600">
           Built by{" "}
           <a
             href="https://cityfriends.tech"

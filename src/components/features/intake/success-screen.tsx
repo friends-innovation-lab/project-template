@@ -19,9 +19,9 @@ export function SuccessScreen({ data, onReset }: SuccessScreenProps) {
     <div className="mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center px-4">
       <Card className="w-full border-gov-200 bg-gov-50 text-center shadow-card">
         <CardHeader>
-          <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-brand-100">
+          <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-fftc-yellow/20">
             <svg
-              className="h-6 w-6 text-brand-500"
+              className="h-6 w-6 text-fftc-black"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={2}
