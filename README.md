@@ -28,16 +28,16 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start dev server |
-| `npm run build` | Production build |
-| `npm run lint` | Run ESLint |
-| `npm run lint:fix` | Fix ESLint issues |
-| `npm run format` | Format with Prettier |
-| `npm run typecheck` | TypeScript check |
-| `npm run test` | Run tests (watch) |
-| `npm run test:run` | Run tests once |
+| Command             | Description          |
+| ------------------- | -------------------- |
+| `npm run dev`       | Start dev server     |
+| `npm run build`     | Production build     |
+| `npm run lint`      | Run ESLint           |
+| `npm run lint:fix`  | Fix ESLint issues    |
+| `npm run format`    | Format with Prettier |
+| `npm run typecheck` | TypeScript check     |
+| `npm run test`      | Run tests (watch)    |
+| `npm run test:run`  | Run tests once       |
 
 ## Project Structure
 
@@ -72,11 +72,11 @@ Browse components at [ui.shadcn.com](https://ui.shadcn.com/docs/components).
 
 Copy `.env.example` to `.env.local` and fill in:
 
-| Variable | Description |
-|----------|-------------|
-| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon/public key |
-| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role key (server only) |
+| Variable                        | Description                             |
+| ------------------------------- | --------------------------------------- |
+| `NEXT_PUBLIC_SUPABASE_URL`      | Supabase project URL                    |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon/public key                |
+| `SUPABASE_SERVICE_ROLE_KEY`     | Supabase service role key (server only) |
 
 ## Deployment
 
