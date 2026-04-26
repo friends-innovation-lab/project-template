@@ -1,0 +1,17 @@
+[
+  {
+    "name": "First Load JS (shared)",
+    "path": [
+      ".next/static/chunks/framework-*.js",
+      ".next/static/chunks/main-*.js",
+      ".next/static/chunks/polyfills-*.js",
+      ".next/static/chunks/webpack-*.js"
+    ],
+    "limit": "400 KB"
+  },
+  {
+    "name": "Total JS",
+    "path": ".next/static/**/*.js",
+    "limit": "1.5 MB"
+  }
+]
