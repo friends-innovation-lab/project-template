@@ -99,7 +99,7 @@ export function IntakeFlow() {
               <span
                 className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold ${
                   i <= currentStep
-                    ? "bg-brand-500 text-gov-50"
+                    ? "bg-fftc-yellow text-fftc-black"
                     : "bg-gov-200 text-gov-400"
                 }`}
               >
@@ -115,7 +115,7 @@ export function IntakeFlow() {
               {i < STEPS.length - 1 && (
                 <div
                   className={`mx-2 hidden h-px w-8 sm:block ${
-                    i < currentStep ? "bg-brand-500" : "bg-gov-200"
+                    i < currentStep ? "bg-fftc-yellow" : "bg-gov-200"
                   }`}
                 />
               )}

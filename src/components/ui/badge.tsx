@@ -8,7 +8,7 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-brand-50 text-brand-500",
+        default: "bg-fftc-yellow/20 text-fftc-black",
         success: "bg-gov-50 text-success",
         warning: "bg-gov-50 text-warning",
         error: "bg-gov-50 text-error",
