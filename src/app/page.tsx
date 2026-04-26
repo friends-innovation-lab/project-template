@@ -49,7 +49,7 @@ export default function HomePage() {
       </div>
 
       <footer className="border-t border-gov-200 py-8">
-        <div className="mx-auto max-w-7xl px-4 text-center text-sm text-gov-400">
+        <div className="mx-auto max-w-7xl px-4 text-center text-sm text-gov-600">
           Built by{" "}
           <a
             href="https://cityfriends.tech"
