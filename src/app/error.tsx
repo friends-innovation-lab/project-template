@@ -12,7 +12,9 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    Sentry.captureException(error);
+    if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
+      Sentry.captureException(error);
+    }
   }, [error]);
 
   return (
@@ -22,7 +24,7 @@ export default function Error({
           Something went wrong
         </h1>
         <p className="text-muted-foreground max-w-md">
-          An unexpected error occurred. The team has been notified.
+          An unexpected error occurred. Please try again or contact support.
         </p>
         <Button onClick={reset}>Try again</Button>
       </div>

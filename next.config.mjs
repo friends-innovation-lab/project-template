@@ -21,13 +21,18 @@ const nextConfig = {
   },
 }
 
-export default withSentryConfig(nextConfig, {
-  // Sentry build options
-  silent: true,
-  org: process.env.SENTRY_ORG,
-  project: process.env.SENTRY_PROJECT,
-}, {
-  // Sentry runtime options
-  hideSourceMaps: true,
-  disableLogger: true,
-})
+// Only wrap with Sentry if DSN is configured
+const sentryEnabled = process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN
+
+export default sentryEnabled
+  ? withSentryConfig(nextConfig, {
+      // Sentry build options
+      silent: true,
+      org: process.env.SENTRY_ORG,
+      project: process.env.SENTRY_PROJECT,
+    }, {
+      // Sentry runtime options
+      hideSourceMaps: true,
+      disableLogger: true,
+    })
+  : nextConfig
